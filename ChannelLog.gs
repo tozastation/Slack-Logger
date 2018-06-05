@@ -1,4 +1,4 @@
-function myFunction() {
+function myFunction2() {
   for each(var element_a in getArchivedChannel()){
     var sheet = addSheet(element_a[1]);
     for each(var element_b in getChannelHistory(element_a[0])){
@@ -34,7 +34,7 @@ function getArchivedChannel(){
   var ChannelList = [];
   for(var i=2;i<=last_row;i++){
     if(sheet.getRange(i, 3).getValue()){
-      ChannelList.push([sheet.getRange(i,1).getValue(),sheet.getRange(i, 2).getValue()]);
+      ChannelList.push([sheet.getRange(i,1).getValue(),　sheet.getRange(i,2).getValue()]);
     }
   }
   return ChannelList
