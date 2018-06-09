@@ -13,6 +13,7 @@ function getSlackChannel(){
     buffer.push(element['id'],element['name'],element['is_archived']);
     json_list.push(buffer);
   }
+  Logger.log(json_list);
   return json_list;
 }
 
@@ -29,14 +30,19 @@ function deleteExistChannel(){
 }
 
 function setSlackChannel(list){
-  var spreadsheet = SpreadsheetApp.openById('1rpALEc4wrJE_mr7BB7S0ntIgKHUcbKHmZHlNpZLEOiM');
+  var sheet_id = PropertiesService.getScriptProperties().getProperty('SPREAD_SHEET_ID');
+  var spreadsheet = SpreadsheetApp.openById(sheet_id);
   var sheet = spreadsheet.getSheetByName('sheet1');
   arrayLeadData = ['ID','Channel','Archives'];
   var lastRow = sheet.getLastRow();
   if(lastRow === 0){
     sheet.appendRow(arrayLeadData);
   }else if(lastRow > 0){
-    deleteExistChannel();
+    try{
+      deleteExistChannel();
+    }catch(e){
+      Logger.log(e);
+    }
     for each(var element in list){
       sheet.appendRow(element);
     } 

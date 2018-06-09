@@ -1,17 +1,18 @@
 function myFunction2() {
   for each(var element_a in getArchivedChannel()){
-    var sheet = addSheet(element_a[1]);
+    var sheet = addSheet(element_a[0]);
     var last_row = sheet.getLastRow()
     for(var i=2;i<=last_row;i++){
       sheet.getRange(i, 1).clear();
       sheet.getRange(i, 2).clear();
     }
     for each(var element_b in getChannelHistory(element_a[0])){
-      arrayLeadData = ['USER','MESSAGE'];
+      arrayLeadData = ['USER','MESSAGE','CHANNEL_NAME'];
       var lastRow = sheet.getLastRow();
       if(lastRow === 0){
         sheet.appendRow(arrayLeadData);
       }
+      element_b.push(element_a[1])
       sheet.appendRow(element_b);
     }
   }
